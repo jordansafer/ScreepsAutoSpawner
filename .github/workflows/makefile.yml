@@ -14,7 +14,12 @@ jobs:
     - uses: actions/checkout@v2
       
     - name: Install dependencies
-      run: make
+      run: |
+        make
+        python setup.py
+      
+    - name: Run setup
+      run: python setup.py
       
     - name: Copy secrets
       uses: nowactions/envsubst@v1.0.1
