@@ -4,15 +4,6 @@ from setuptools import setup, find_packages
 from codecs import open
 from os import path
 
-here = path.abspath(path.dirname(__file__))
-
-try:
-    import pypandoc
-    long_description = pypandoc.convert('README.md', 'rst')
-except(IOError, ImportError):
-    long_description = open('README.md').read()
-
-
 version = '0.3.0'
 setup(
 
@@ -42,23 +33,14 @@ setup(
   ],
 
   install_requires=[
-    'click>=5.0,<6.0',
     'PyYAML>=5.3.1',
     'requests>=2.18.0,<2.19',
     'screepsapi>=0.5.0'
   ],
 
-  extras_require={
-    'dev': [
-      'pypandoc',
-      'twine',
-      'wheel'
-    ],
-  },
-
   entry_points={
     'console_scripts': [
-      'screepsautospawner=autospawner.cli:cli',
+      'screepsautospawner=autospawner.cli',
     ],
   },
 

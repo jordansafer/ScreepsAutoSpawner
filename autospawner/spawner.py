@@ -1,4 +1,3 @@
-import click
 import screepsapi
 from autospawner.screeps import screepsclient
 import re
@@ -32,14 +31,14 @@ class Spawner:
         statusres = screepsclient.world_status()
         if 'status' in statusres and statusres['status'] == 'lost':
             screepsclient.respawn()
-            click.echo('Sleeping to avoid respawn rate limiting')
+            print('Sleeping to avoid respawn rate limiting')
             sleep(185)
 
         self.resetMemory()
 
         ret = screepsclient.place_spawn(room, 'Spawn1', position['x'], position['y'], shard)
         if 'error' in ret:
-            click.echo(ret['error'])
+            print(ret['error'])
             return False
         return True
 
@@ -212,7 +211,7 @@ class RoomInfo:
             try:
                 data = json.loads(response)
             except ValueError:
-                click.echo(ValueError)
+                print(ValueError)
                 continue
 
             if 'shard' in data[0]:
