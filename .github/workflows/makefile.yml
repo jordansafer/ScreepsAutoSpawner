@@ -18,8 +18,7 @@ jobs:
       
     - name: Install dependencies
       run: |
-        make
-        pip install .
+        pip install -r requirements.txt
       
     - name: Copy secrets
       uses: nowactions/envsubst@v1.0.1
@@ -30,4 +29,4 @@ jobs:
         MMO_TOKEN: ${{ secrets.MMO_TOKEN }}
     
     - name: Trigger spawn
-      run: screepsautospawner respawn
+      run: python3 autospawner/cli.py
