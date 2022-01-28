@@ -11,7 +11,7 @@ if not os.path.isfile(path):
     sys.exit(-1)
 
 with open(path, 'r') as f:
-    settings = yaml.load(f)
+    settings = yaml.load(f, yaml.Loader)
 
 if 'ptr' not in settings:
     settings['ptr']= None
