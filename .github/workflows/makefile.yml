@@ -16,7 +16,7 @@ jobs:
     - name: Install dependencies
       run: |
         make
-        python setup.py install
+        pip install .
       
     - name: Copy secrets
       uses: nowactions/envsubst@v1.0.1
