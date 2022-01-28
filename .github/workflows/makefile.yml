@@ -16,6 +16,9 @@ jobs:
     - name: Install dependencies
       run: |
         make
+        sudo apt-get install python-virtualenv
+        python3 -m venv deployenv
+        source deployenv/bin/activate
         pip install .
       
     - name: Copy secrets
