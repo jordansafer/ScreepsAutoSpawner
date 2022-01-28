@@ -1,5 +1,4 @@
-import screepsapi
-from autospawner.screeps import screepsclient
+from screeps import screepsclient
 import re
 import random
 import sys
@@ -80,7 +79,12 @@ class Spawner:
         return winning_shard
 
     def getRoom(self, shard):
-        sectors = screepsclient.world_start_room(shard=shard)['room']
+        sectors = []
+        while (len(sectors) == 0):
+            start_room = screepsclient.world_start_room()
+            print(f"Trying to get start room from response {start_room}")
+            sectors = start_room['room']
+            sleep(5)
         screepsclient.api_error_except(sectors)
         while True:
             sector = sectors.pop()
@@ -97,13 +101,16 @@ class Spawner:
         return rooms
 
     def getRoomList(self, shard, sector):
-        p = re.compile('^(E|W)(\d+)(N|S)(\d+)$')
-        matches = p.match(sector).groups()
+        p = re.compile('^(shard\d\/)(E|W)(\d+)(N|S)(\d+)$')
+        print(f"sector: {sector}, match: {p.match(sector)}")
+        matches = p.match(sector).groups()[1:]
         dir_x = matches[0]
         dir_y = matches[2]
         start_x = int(matches[1])-4
         start_y = int(matches[3])-4
         roomlist = []
+        # Sleep to avoid throttling from map/stats API
+        sleep(60)
         for x in range(start_x, start_x+9):
             sys.stdout.write('.')
             sys.stdout.flush()

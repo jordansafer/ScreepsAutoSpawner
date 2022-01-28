@@ -13,22 +13,7 @@ if not os.path.isfile(path):
 with open(path, 'r') as f:
     settings = yaml.load(f, yaml.Loader)
 
-if 'ptr' not in settings:
-    settings['ptr']= None
-if 'host' not in settings:
-    settings['host']= None
-
-if 'token' in settings:
-    screepsclient = screepsapi.API(
-                    token=settings['token'],
-                    ptr=settings['ptr'],
-                    host=settings['host'])
-else:
-    screepsclient = screepsapi.API(
-                    u=settings['username'],
-                    p=settings['password'],
-                    ptr=settings['ptr'],
-                    host=settings['host'])
+screepsclient = screepsapi.API(token=settings['token'])
 
 def api_error_except(api_result):
     if 'error' in api_result:
