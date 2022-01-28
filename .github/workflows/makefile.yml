@@ -25,4 +25,4 @@ jobs:
         MMO_TOKEN: ${{ secrets.MMO_TOKEN }}
     
     - name: Trigger spawn
-      run: screepsautospawner respawn()
+      run: screepsautospawner respawn
