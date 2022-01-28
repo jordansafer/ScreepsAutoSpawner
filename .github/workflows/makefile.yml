@@ -8,17 +8,21 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
       
     - name: Install dependencies
-      run: make
+    - run: make
       
     - name: Copy secrets
-    - run: echo "TODO"
+      uses: nowactions/envsubst@v1.0.1
+      with:
+        input: ./.screepsasNoCreds.yaml
+        output: ./.screepsas.yaml
+      env:
+        MMO_TOKEN: ${{ secrets.MMO_TOKEN }}
     
     - name: Trigger spawn
     - run: echo "screepsautospawner respawn()"
